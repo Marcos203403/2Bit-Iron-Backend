@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+const categoriaRoutes = require('./routes/categoriaRoutes');
+app.use('/api/categorias', categoriaRoutes);
+
+
 // Health check
 app.get('/', (req, res) => {
     res.json({ status: 'ok', message: 'BitIron API running' });
