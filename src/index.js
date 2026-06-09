@@ -13,6 +13,8 @@ app.use(express.json());
 const categoriaRoutes = require('./routes/categoriaRoutes');
 app.use('/api/categorias', categoriaRoutes);
 
+const productoRoutes = require('./routes/productoRoutes');
+app.use('/api/productos', productoRoutes);
 
 // Health check
 app.get('/', (req, res) => {
