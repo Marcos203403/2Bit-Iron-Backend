@@ -5,7 +5,8 @@ const getAll = async (req, res) => {
         const rows = await Categoria.getAll();
         res.json({ success: true, data: rows });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
@@ -15,7 +16,8 @@ const getById = async (req, res) => {
         if (rows.length === 0) return res.status(404).json({ message: 'Category not found' });
         res.json(rows[0]);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
@@ -26,7 +28,8 @@ const create = async (req, res) => {
         const result = await Categoria.create(req.body);
         res.status(201).json({ message: 'Category created', id: result.insertId });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
@@ -38,7 +41,8 @@ const update = async (req, res) => {
         if (result.affectedRows === 0) return res.status(404).json({ message: 'Category not found' });
         res.json({ message: 'Category updated' });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
@@ -51,7 +55,8 @@ const remove = async (req, res) => {
         if (result.affectedRows === 0) return res.status(404).json({ message: 'Category not found' });
         res.json({ message: 'Category deleted' });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
