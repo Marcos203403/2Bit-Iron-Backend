@@ -1,0 +1,43 @@
+name: Integration Tests CI
+
+on:
+  pull_request:
+    branches: [ "develop", "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: testrootpassword
+          MARIADB_DATABASE: testdb
+        ports:
+          - 3306:3306
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Initialize Database
+      run: mysql -h 127.0.0.1 -P 3306 -u root -ptestrootpassword testdb < db/init.sql
+      
+    - name: Run Tests
+      env:
+        DB_HOST: 127.0.0.1
+        DB_USER: root
+        DB_PASS: testrootpassword
+        DB_NAME: testdb
+        NODE_ENV: test
+      run: npm test
