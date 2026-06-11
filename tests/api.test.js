@@ -54,7 +54,7 @@ describe('API Integration Tests', () => {
             expect(Array.isArray(res.body.data)).toBeTruthy();
         });
 
-        it('POST /api/productos - debería fallar por lógica de negocio si la categoría no existe', async () => {
+        it('POST /api/productos - debería fallar si la categoría no existe', async () => {
             const res = await request(app)
                 .post('/api/productos')
                 .send({

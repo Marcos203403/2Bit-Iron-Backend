@@ -31,7 +31,7 @@ const create = async (req, res) => {
             return res.status(400).json({ message: 'Nombre, Precio e IdCategoria son obligatorios' });
         }
 
-        // LÓGICA DE NEGOCIO OBLIGATORIA: Comprobar que la categoría existe antes de crear el producto
+        // Comprobar que la categoría existe antes de crear el producto
         const categoriaExists = await Categoria.getById(IdCategoria);
         if (categoriaExists.length === 0) {
             return res.status(404).json({ message: 'Error de negocio: La categoría indicada no existe' });
@@ -54,7 +54,7 @@ const update = async (req, res) => {
             return res.status(400).json({ message: 'Nombre, Precio e IdCategoria son obligatorios' });
         }
 
-        // LÓGICA DE NEGOCIO OBLIGATORIA: Comprobar que la nueva categoría existe antes de editar
+        // Comprobar que la categoría existe antes de editar
         const categoriaExists = await Categoria.getById(IdCategoria);
         if (categoriaExists.length === 0) {
             return res.status(404).json({ message: 'Error de negocio: La categoría indicada no existe' });
