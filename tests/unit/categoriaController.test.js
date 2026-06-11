@@ -50,7 +50,7 @@ describe('Categoria Controller - Unit Tests', () => {
         });
     });
 
-    describe('remove() - Lógica de Negocio', () => {
+    describe('remove()', () => {
         it('debería devolver 400 y NO borrar si la categoría tiene productos asignados', async () => {
             req.params.id = 1;
             // Simulamos que la categoría tiene 2 productos asignados
