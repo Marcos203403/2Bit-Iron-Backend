@@ -14,17 +14,17 @@ const getById = async (id) => {
 const create = async (data) => {
     const { Nombre, Descripcion, Precio, Stock, Marca, Genero, ObjetivoRecomendado, Imagen_Url, Activo, IdCategoria } = data;
     const [result] = await pool.query(
-        'INSERT INTO PRODUCTO (Nombre, Descripcion, Precio, Stock, Marca, Genero, ObjetivoRecomendado, Imagen_Url, Activo, IdCategoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [Nombre, Descripcion || null, Precio, Stock || 0, Marca || null, Genero || 'Unisex', ObjetivoRecomendado || null, Imagen_Url || null, Activo !== undefined ? Activo : true, IdCategoria]
+        'INSERT INTO PRODUCTO (Nombre, Descripcion, Precio, Stock, Marca, Genero, ObjetivoRecomendado, Imagen_Url, Activo, IdCategoria, Fabricante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [Nombre, Descripcion, Fabricante|| null, Precio, Stock || 0, Marca || null, Genero || 'Unisex', ObjetivoRecomendado || null, Imagen_Url || null, Activo !== undefined ? Activo : true, IdCategoria ]
     );
     return result;
 };
 
 const update = async (id, data) => {
-    const { Nombre, Descripcion, Precio, Stock, Marca, Genero, ObjetivoRecomendado, Imagen_Url, Activo, IdCategoria } = data;
+    const { Nombre, Descripcion, Precio, Stock, Marca, Genero, ObjetivoRecomendado, Imagen_Url, Activo, IdCategoria, Fabricante } = data;
     const [result] = await pool.query(
-        'UPDATE PRODUCTO SET Nombre = ?, Descripcion = ?, Precio = ?, Stock = ?, Marca = ?, Genero = ?, ObjetivoRecomendado = ?, Imagen_Url = ?, Activo = ?, IdCategoria = ? WHERE IdProducto = ?',
-        [Nombre, Descripcion || null, Precio, Stock || 0, Marca || null, Genero || 'Unisex', ObjetivoRecomendado || null, Imagen_Url || null, Activo !== undefined ? Activo : true, IdCategoria, id]
+        'UPDATE PRODUCTO SET Nombre = ?, Descripcion = ?, Precio = ?, Stock = ?, Marca = ?, Genero = ?, ObjetivoRecomendado = ?, Imagen_Url = ?, Activo = ?, IdCategoria = ? WHERE IdProducto = ?', 'Fabricante= ?',
+        [Nombre, Descripcion, Fabricante || null, Precio, Stock || 0, Marca || null, Genero || 'Unisex', ObjetivoRecomendado || null, Imagen_Url || null, Activo !== undefined ? Activo : true, IdCategoria, id]
     );
     return result;
 };
