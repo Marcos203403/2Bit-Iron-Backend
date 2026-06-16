@@ -27,7 +27,8 @@ CREATE TABLE PRODUCTO (
     Marca               VARCHAR(100),
     ObjetivoRecomendado VARCHAR(50), 
     Activo              BOOLEAN NOT NULL DEFAULT TRUE,
-    IdCategoria         INT NOT NULL
+    IdCategoria         INT NOT NULL,
+    Fabricante          VARCHAR(50)
 );
 
 CREATE TABLE CLIENTE (
